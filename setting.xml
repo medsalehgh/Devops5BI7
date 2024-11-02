@@ -4,13 +4,13 @@
     <servers>
         <server>
             <id>deploymentRepo</id> <!-- Matches the id in your pom.xml -->
-            <username>YourUsername</username> <!-- Your Nexus username -->
-            <password>YourPassword</password> <!-- Your Nexus password -->
+            <username>jenkins-user</username> <!-- Your Nexus username -->
+            <password>Hsouna</password> <!-- Your Nexus password -->
         </server>
         <server>
             <id>snapshotRepo</id> <!-- Matches the id in your pom.xml -->
-            <username>YourUsername</username> <!-- Your Nexus username -->
-            <password>YourPassword</password> <!-- Your Nexus password -->
+            <username>jenkins-user</username> <!-- Your Nexus username -->
+            <password>Hsouna</password> <!-- Your Nexus password -->
         </server>
     </servers>
 </settings>
