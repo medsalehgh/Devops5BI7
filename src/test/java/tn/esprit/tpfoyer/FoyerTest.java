@@ -118,7 +118,21 @@ class FoyerTest {
         assertThrows(RuntimeException.class, () -> foyerService.removeFoyer(FOYER_ID), "Expected exception not thrown for non-existing foyer");
     }
 
+    @Test
+    public void testToString() {
+        foyer.setNomFoyer("Test Foyer");
+        foyer.setCapaciteFoyer(200);
+        String expectedString = "Foyer(idFoyer=1, nomFoyer=Test Foyer, capaciteFoyer=200)";
+        assertEquals(expectedString, foyer.toString(), "ToString should match expected format");
+    }
 
+
+    @Test
+    public void testSetAndGetCapaciteFoyer() {
+        long capacity = 150;
+        foyer.setCapaciteFoyer(capacity);
+        assertEquals(capacity, foyer.getCapaciteFoyer(), "Foyer capacity should match");
+    }
 
     @Test
     void addFoyer_ShouldThrowException_WhenFoyerIsNull() {
