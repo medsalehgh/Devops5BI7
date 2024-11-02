@@ -1,6 +1,7 @@
 package tn.esprit.tpfoyer.control;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tpfoyer.entity.Foyer;
 import tn.esprit.tpfoyer.service.IFoyerService;
@@ -36,8 +37,9 @@ public class FoyerRestController {
 
     // http://localhost:8089/tpfoyer/foyer/remove-foyer/{foyer-id}
     @DeleteMapping("/remove-foyer/{foyer-id}")
-    public void removeFoyer(@PathVariable("foyer-id") Long fId) {
+    public ResponseEntity<Void> removeFoyer(@PathVariable("foyer-id") Long fId) {
         foyerService.removeFoyer(fId);
+        return ResponseEntity.ok().build(); // Return HTTP 200 OK with no body
     }
 
     // http://localhost:8089/tpfoyer/foyer/modify-foyer
