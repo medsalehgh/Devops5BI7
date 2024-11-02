@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Foyer;
+import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.repository.FoyerRepository;
 import tn.esprit.tpfoyer.service.FoyerServiceImpl;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -30,6 +30,7 @@ class FoyerTest {
     private FoyerServiceImpl foyerService;
 
     private Foyer foyer;
+    private Bloc bloc;
 
     @BeforeEach
     void setUp() {
@@ -126,6 +127,20 @@ class FoyerTest {
         assertEquals(expectedString, foyer.toString(), "ToString should match expected format");
     }
 
+    @Test
+    public void testSetAndGetUniversite() {
+        Universite universite = new Universite(); // Assume Universite is a valid class
+        foyer.setUniversite(universite);
+        assertEquals(universite, foyer.getUniversite(), "Foyer should have the correct university");
+    }
+
+
+    @Test
+    public void testSetAndGetBlocs() {
+        Set<Bloc> blocs = new HashSet<>();
+        foyer.setBlocs(blocs);
+        assertEquals(blocs, foyer.getBlocs(), "Foyer should have the correct blocks");
+    }
 
     @Test
     public void testSetAndGetCapaciteFoyer() {
