@@ -33,6 +33,7 @@ class FoyerRepositoryUnitTest {
         foyer = new Foyer();
         foyer.setIdFoyer(1L);
         foyer.setNomFoyer("Main Foyer");
+        foyer.setCapaciteFoyer(300);
 
         when(foyerRepository.save(any(Foyer.class))).thenReturn(foyer);
     }
