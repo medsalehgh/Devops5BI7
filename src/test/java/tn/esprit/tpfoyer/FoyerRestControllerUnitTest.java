@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import static org.springframework.http.HttpStatus.OK;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,17 +59,15 @@ class FoyerRestControllerUnitTest {
 
 
     @Test
-    void testDeleteFoyer() {
-        // Mocking behavior
-        doNothing().when(foyerService).removeFoyer(1L);
+    void testRemoveFoyer() {
+        // Arrange
+        Long foyerId = 8L;
 
-        // Perform the test
-        ResponseEntity<Void> responseEntity = foyerController.removeFoyer(1L);
+        // Act
+        ResponseEntity<Void> response = foyerController.removeFoyer(foyerId);
 
-        // Verify the interactions
-        verify(foyerService, times(1)).removeFoyer(1L);
-
-        // Assertions
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode()); // Ensure it returns 200 OK
+        // Assert
+        verify(foyerService, times(1)).removeFoyer(foyerId);
+        assertEquals(OK, response.getStatusCode()); // Checks if the status is 200 OK
     }
 }
