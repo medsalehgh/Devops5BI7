@@ -32,6 +32,29 @@ public class Foyer {
             @JsonIgnore
             @ToString.Exclude
     Set<Bloc> blocs;
+    public long getCapaciteFoyer() {
+        return capaciteFoyer;
+    }
+
+    public void setCapaciteFoyer(long capaciteFoyer) {
+        this.capaciteFoyer = capaciteFoyer;
+    }
+
+    public Universite getUniversite() {
+        return universite;
+    }
+
+    public void setUniversite(Universite universite) {
+        this.universite = universite;
+    }
+
+    public Set<Bloc> getBlocs() {
+        return blocs;
+    }
+
+    public void setBlocs(Set<Bloc> blocs) {
+        this.blocs = blocs;
+    }
 
 }
 

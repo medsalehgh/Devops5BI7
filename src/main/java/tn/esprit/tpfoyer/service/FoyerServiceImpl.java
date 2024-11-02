@@ -33,6 +33,8 @@ public class FoyerServiceImpl implements IFoyerService {
         return foyerRepository.save(foyer);
     }
 
+
+
     public void removeFoyer(Long foyerId) {
         foyerRepository.deleteById(foyerId);
     }
