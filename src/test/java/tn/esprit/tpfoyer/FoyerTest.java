@@ -113,4 +113,40 @@ class FoyerTest {
         // Act & Assert
         assertThrows(RuntimeException.class, () -> foyerService.removeFoyer(FOYER_ID), "Expected exception not thrown for non-existing foyer");
     }
+
+
+
+    @Test
+    void addFoyer_ShouldThrowException_WhenFoyerIsNull() {
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> foyerService.addFoyer(null), "Expected exception not thrown for null foyer");
+    }
+
+    @Test
+    void modifyFoyer_ShouldThrowException_WhenFoyerDoesNotExist() {
+        // Arrange
+        doThrow(new RuntimeException("Foyer not found")).when(foyerRepository).save(foyer);
+
+        // Act & Assert
+        assertThrows(RuntimeException.class, () -> foyerService.modifyFoyer(foyer), "Expected exception not thrown for non-existing foyer");
+    }
+
+
+
+    @Test
+    void addFoyer_ShouldThrowException_WhenFoyerWithDuplicateName() {
+        // Arrange
+        Foyer duplicateFoyer = new Foyer();
+        duplicateFoyer.setNomFoyer(FOYER_NAME); // Same name as existing foyer
+        when(foyerRepository.save(duplicateFoyer)).thenThrow(new RuntimeException("Foyer with this name already exists"));
+
+        // Act & Assert
+        assertThrows(RuntimeException.class, () -> foyerService.addFoyer(duplicateFoyer), "Expected exception not thrown for duplicate foyer name");
+    }
+
+
+
+
+
+
 }
