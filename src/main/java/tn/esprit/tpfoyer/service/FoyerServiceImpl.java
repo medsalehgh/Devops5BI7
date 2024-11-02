@@ -12,16 +12,23 @@ import java.util.List;
 @AllArgsConstructor
 public class FoyerServiceImpl implements IFoyerService {
 
-    FoyerRepository foyerRepository;
+    private final FoyerRepository foyerRepository;
+
     public List<Foyer> retrieveAllFoyers() {
         return foyerRepository.findAll();
     }
+
     public Foyer retrieveFoyer(Long foyerId) {
-        return foyerRepository.findById(foyerId).get();
+        return foyerRepository.findById(foyerId).orElse(null);
     }
+
     public Foyer addFoyer(Foyer f) {
+        if (f == null) {
+            throw new IllegalArgumentException("Foyer cannot be null");
+        }
         return foyerRepository.save(f);
     }
+
     public Foyer modifyFoyer(Foyer foyer) {
         return foyerRepository.save(foyer);
     }
