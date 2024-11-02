@@ -126,11 +126,6 @@
             <name>Nexus Repository</name>
             <url>http://192.168.33.10:8081/repository/maven-nexus-repos/</url>
         </repository>
-        <snapshotRepository>
-            <id>snapshotRepo</id> <!-- Changed ID to differentiate from the deploymentRepo -->
-            <name>Snapshots Nexus Repository</name>
-            <url>http://192.168.33.10:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
     </distributionManagement>
 
 </project>
