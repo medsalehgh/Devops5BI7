@@ -127,5 +127,4 @@ class FoyerServiceUnitTest {
         assertEquals(5L, deletedFoyerId);
     }
 
-
 }

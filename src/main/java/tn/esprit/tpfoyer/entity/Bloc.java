@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @Getter
@@ -14,25 +16,22 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Foyer {
+public class Bloc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idFoyer;
+    long idBloc;
 
-    String nomFoyer;
-    long capaciteFoyer;
+    String nomBloc;
+    long capaciteBloc;
 
-    @OneToOne(mappedBy = "foyer")
-    @ToString.Exclude
+    @ManyToOne(cascade = CascadeType.ALL)
+    Foyer foyer;
+
+    @OneToMany(mappedBy = "bloc")
     @JsonIgnore
-    Universite universite;
-
-    @OneToMany(mappedBy = "foyer")
-            @JsonIgnore
-            @ToString.Exclude
-    Set<Bloc> blocs;
+    @ToString.Exclude
+    Set<Chambre> chambres = new HashSet<Chambre>();
 
 }
-
 
