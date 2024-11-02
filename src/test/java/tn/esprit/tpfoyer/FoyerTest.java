@@ -21,6 +21,7 @@ class FoyerTest {
     private static final Long FOYER_ID = 1L;
     private static final String FOYER_NAME = "Main Foyer";
     private static final String UPDATED_FOYER_NAME = "Updated Foyer";
+    private static final int UPDATED_FOYER_CAPACITY = 400;
 
     @Mock
     private FoyerRepository foyerRepository;
@@ -85,6 +86,7 @@ class FoyerTest {
     void modifyFoyer_ShouldUpdateAndReturnFoyer() {
         // Arrange
         foyer.setNomFoyer(UPDATED_FOYER_NAME);
+        foyer.setCapaciteFoyer(UPDATED_FOYER_CAPACITY); // Set the updated capacity
         when(foyerRepository.save(foyer)).thenReturn(foyer);
 
         // Act
@@ -93,8 +95,10 @@ class FoyerTest {
         // Assert
         assertNotNull(result, "Modified foyer should not be null");
         assertEquals(UPDATED_FOYER_NAME, result.getNomFoyer(), "Foyer name should match the updated value");
+        assertEquals(UPDATED_FOYER_CAPACITY, result.getCapaciteFoyer(), "Foyer capacity should match the updated value"); // Assert for capacity
         verify(foyerRepository, times(1)).save(foyer);
     }
+
 
     @Test
     void removeFoyer_ShouldDeleteFoyer_WhenIdExists() {
