@@ -90,6 +90,17 @@
 
 
     </dependencies>
+    <distributionManagement>
+         <repository>
+             <id>nexus-releases</id> <!-- Repository ID (can be any name) -->
+             <url>http://<your-nexus-server>:8081/repository/maven-releases/</url> <!-- Nexus repository URL -->
+         </repository>
+         <snapshotRepository>
+             <id>nexus-snapshots</id> <!-- Snapshot repository ID -->
+             <url>http://<your-nexus-server>:8081/repository/maven-snapshots/</url> <!-- Nexus snapshot repository URL -->
+         </snapshotRepository>
+    </distributionManagement>
+
 
     <build>
         <plugins>
