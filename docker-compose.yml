@@ -14,7 +14,7 @@ services:
   app-tp-foyer:
     depends_on:
       - mysqldb
-    image: aymen625/tpfoyer:latest
+    image: aymen625/tpfoyer
     restart: on-failure
     ports:
       - 8089:8089
