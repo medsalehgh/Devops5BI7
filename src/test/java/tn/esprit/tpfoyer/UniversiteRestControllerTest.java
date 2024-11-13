@@ -1,4 +1,4 @@
-package tn.esprit.tpfoyer.control;
+package tn.esprit.tpfoyer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
