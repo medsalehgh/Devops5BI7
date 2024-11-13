@@ -18,6 +18,7 @@
         <sonar.projectKey>Devops5BI7</sonar.projectKey>
         <sonar.sources>src/main/java</sonar.sources>
         <sonar.tests>src/test/java</sonar.tests>
+        <sonar.exclusions>src/test/**</sonar.exclusions>
     </properties>
     <dependencies>
         <dependency>
