@@ -51,7 +51,7 @@ public class BlocTest {
         when(blocRepository.findById(1L)).thenReturn(Optional.of(bloc));
 
         // Act
-        Bloc foundBloc = blocService.getBlocById(1L);
+        Bloc foundBloc = blocService.retrieveBloc(1L);
 
         // Assert
         assertNotNull(foundBloc);
@@ -71,7 +71,7 @@ public class BlocTest {
         when(blocRepository.save(bloc)).thenReturn(bloc);
 
         // Act
-        Bloc updatedBloc = blocService.updateBloc(bloc);
+        Bloc updatedBloc = blocService.modifyBloc(bloc);
 
         // Assert
         assertNotNull(updatedBloc);
@@ -87,7 +87,7 @@ public class BlocTest {
         doNothing().when(blocRepository).deleteById(blocId);
 
         // Act
-        blocService.deleteBloc(blocId);
+        blocService.removeBloc(blocId);
 
         // Assert
         verify(blocRepository, times(1)).deleteById(blocId);
