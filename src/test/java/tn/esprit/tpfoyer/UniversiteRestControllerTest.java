@@ -8,9 +8,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import tn.esprit.tpfoyer.control.UniversiteRestController;
+import tn.esprit.tpfoyer.entity.Foyer;  // Import Foyer
 import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.service.IUniversiteService;
-import tn.esprit.tpfoyer.control.UniversiteRestController;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,8 +39,9 @@ class UniversiteRestControllerTest {
 
     @Test
     void testGetUniversites() throws Exception {
-        Universite uni1 = new Universite(1L, "Université de Test 1", "Adresse 1");
-        Universite uni2 = new Universite(2L, "Université de Test 2", "Adresse 2");
+        Foyer foyer1 = new Foyer(); // You can mock the Foyer class or create a simple instance
+        Universite uni1 = new Universite(1L, "Université de Test 1", "Adresse 1", foyer1);
+        Universite uni2 = new Universite(2L, "Université de Test 2", "Adresse 2", foyer1);
 
         List<Universite> universites = Arrays.asList(uni1, uni2);
 
@@ -57,7 +59,8 @@ class UniversiteRestControllerTest {
 
     @Test
     void testAddUniversite() throws Exception {
-        Universite newUniversite = new Universite(1L, "New Universite", "New Address");
+        Foyer foyer1 = new Foyer(); // You can mock the Foyer class or create a simple instance
+        Universite newUniversite = new Universite(1L, "New Universite", "New Address", foyer1);
 
         when(universiteService.addUniversite(any(Universite.class))).thenReturn(newUniversite);
 
@@ -73,7 +76,8 @@ class UniversiteRestControllerTest {
 
     @Test
     void testRetrieveUniversite() throws Exception {
-        Universite universite = new Universite(1L, "Université de Test", "Adresse de Test");
+        Foyer foyer1 = new Foyer(); // You can mock the Foyer class or create a simple instance
+        Universite universite = new Universite(1L, "Université de Test", "Adresse de Test", foyer1);
 
         when(universiteService.retrieveUniversite(1L)).thenReturn(universite);
 
@@ -99,7 +103,8 @@ class UniversiteRestControllerTest {
 
     @Test
     void testModifyUniversite() throws Exception {
-        Universite modifiedUniversite = new Universite(1L, "Modified Universite", "Modified Address");
+        Foyer foyer1 = new Foyer(); // You can mock the Foyer class or create a simple instance
+        Universite modifiedUniversite = new Universite(1L, "Modified Universite", "Modified Address", foyer1);
 
         when(universiteService.modifyUniversite(any(Universite.class))).thenReturn(modifiedUniversite);
 
@@ -113,4 +118,3 @@ class UniversiteRestControllerTest {
         verify(universiteService, times(1)).modifyUniversite(any(Universite.class));
     }
 }
-
