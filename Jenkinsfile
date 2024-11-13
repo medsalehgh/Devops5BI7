@@ -4,6 +4,7 @@ pipeline {
     environment {
         SONARQUBE = 'Local SonarQube'  // Name of your SonarQube server
         SONAR_PROJECT_KEY = 'Devops5BI7'  // SonarQube project key
+        SONAR_TOKEN = 'squ_0901cfdbcc1481ffd8927a9c6545107f5b672673'
     }
 
     stages {
