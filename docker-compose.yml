@@ -11,10 +11,10 @@ services:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
-  app-achat:
+  app-tp-foyer:
     depends_on:
       - mysqldb
-    image: aymentrifi/tpfoyer:tpfoyer
+    image: aymentrifi/tpfoyer:latest
     restart: on-failure
     ports:
       - 8089:8089
