@@ -93,7 +93,7 @@
     <distributionManagement>
          <repository>
              <id>nexus-releases</id> <!-- Repository ID (can be any name) -->
-             <url>http://<your-nexus-server>:8081/repository/maven-releases/</url> <!-- Nexus repository URL -->
+             <url>http://192.168.33.10:8081/repository/maven-releases/</url> <!-- Nexus repository URL -->
          </repository>
          <snapshotRepository>
              <id>nexus-snapshots</id> <!-- Snapshot repository ID -->
