@@ -1,118 +1,68 @@
 package tn.esprit.tpfoyer;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import tn.esprit.tpfoyer.entity.Etudiant;
-import tn.esprit.tpfoyer.repository.EtudiantRepository;
-import tn.esprit.tpfoyer.service.EtudiantServiceImpl;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import tn.esprit.tpfoyer.entity.Reservation;
+import tn.esprit.tpfoyer.repository.ReservationRepository;
+import tn.esprit.tpfoyer.service.ReservationServiceImpl;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-class EtudiantTest {
+class ReservationTest {
 
     @Mock
-    private EtudiantRepository etudiantRepository;
+    private ReservationRepository reservationRepository;
 
     @InjectMocks
-    private EtudiantServiceImpl etudiantService;
+    private ReservationServiceImpl reservationService;
 
-    private Etudiant etudiant;
+    private Reservation reservation;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);  // Initialize mocks
-        etudiant = new Etudiant();
-        etudiant.setIdEtudiant(1L); // Use setIdEtudiant
-        etudiant.setCinEtudiant(12345678L);
-        etudiant.setNomEtudiant("John"); // Use setNomEtudiant
-        etudiant.setPrenomEtudiant("Doe"); // Use setPrenomEtudiant
+        reservation = new Reservation();
+        reservation.setIdReservation(1L);
+        etudiant.setAnneeUniversitaire(new Date());
+        etudiant.setEstValide(true);
+        Set<Etudiant> etudiants = new HashSet<Etudiant>();
+        etudiant.setEtudiants(etudiants);
     }
 
     @Test
-    void retrieveAllEtudiants_ShouldReturnEtudiantsList() {
+    void retrieveAllReservations() {
         // Arrange
-        when(etudiantRepository.findAll()).thenReturn(Arrays.asList(etudiant));
+        when(reservationRepository.findAll()).thenReturn(Arrays.asList(reservation));
 
         // Act
-        List<Etudiant> etudiants = etudiantService.retrieveAllEtudiants();
+        List<Reservation> reservations = reservationService.retrieveAllReservations();
 
         // Assert
-        assertNotNull(etudiants);
-        assertEquals(1, etudiants.size());
-        verify(etudiantRepository, times(1)).findAll();
+        assertNotNull(reservations);
+        assertEquals(1, reservations.size());
+        verify(reservationRepository, times(1)).findAll();
     }
+
+    
 
     @Test
-    void retrieveEtudiant_ShouldReturnEtudiant_WhenIdExists() {
-        // Arrange
-        when(etudiantRepository.findById(1L)).thenReturn(Optional.of(etudiant));
-
+    void removeReservation() {
         // Act
-        Etudiant result = etudiantService.retrieveEtudiant(1L);
+        reservationService.removeReservation(1L);
 
         // Assert
-        assertNotNull(result);
-        assertEquals(etudiant.getNomEtudiant(), result.getNomEtudiant()); // Use getNomEtudiant
-        verify(etudiantRepository, times(1)).findById(1L);
+        verify(reservationRepository, times(1)).deleteById(1L);
     }
 
-    @Test
-    void addEtudiant_ShouldSaveAndReturnEtudiant() {
-        // Arrange
-        when(etudiantRepository.save(etudiant)).thenReturn(etudiant);
-
-        // Act
-        Etudiant result = etudiantService.addEtudiant(etudiant);
-
-        // Assert
-        assertNotNull(result);
-        assertEquals("John", result.getNomEtudiant()); // Use getNomEtudiant
-        verify(etudiantRepository, times(1)).save(etudiant);
-    }
-
-    @Test
-    void modifyEtudiant_ShouldUpdateAndReturnEtudiant() {
-        // Arrange
-        etudiant.setNomEtudiant("Jane"); // Use setNomEtudiant
-        when(etudiantRepository.save(etudiant)).thenReturn(etudiant);
-
-        // Act
-        Etudiant result = etudiantService.modifyEtudiant(etudiant);
-
-        // Assert
-        assertNotNull(result);
-        assertEquals("Jane", result.getNomEtudiant()); // Use getNomEtudiant
-        verify(etudiantRepository, times(1)).save(etudiant);
-    }
-
-    @Test
-    void removeEtudiant_ShouldDeleteEtudiant_WhenIdExists() {
-        // Act
-        etudiantService.removeEtudiant(1L);
-
-        // Assert
-        verify(etudiantRepository, times(1)).deleteById(1L);
-    }
-
-    @Test
-    void recupererEtudiantParCin_ShouldReturnEtudiant_WhenCinExists() {
-        // Arrange
-        when(etudiantRepository.findEtudiantByCinEtudiant(12345678L)).thenReturn(etudiant);
-
-        // Act
-        Etudiant result = etudiantService.recupererEtudiantParCin(12345678L);
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(12345678L, result.getCinEtudiant());
-        verify(etudiantRepository, times(1)).findEtudiantByCinEtudiant(12345678L);
-    }
+    
 }

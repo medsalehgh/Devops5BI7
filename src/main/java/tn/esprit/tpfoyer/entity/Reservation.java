@@ -1,11 +1,11 @@
 package tn.esprit.tpfoyer.entity;
 
+import java.util.Date;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.Date;
-import java.util.Set;
 
 
 @Entity
@@ -23,13 +23,6 @@ public class Reservation {
 
     Date anneeUniversitaire;
     boolean estValide;
-
-
-
-
-
-
-
 
 
 
