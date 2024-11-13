@@ -22,7 +22,7 @@ public class Universite {
     String adresse;
 
     @OneToOne(cascade = CascadeType.ALL)
-   
+    Foyer;
 }
 
 
