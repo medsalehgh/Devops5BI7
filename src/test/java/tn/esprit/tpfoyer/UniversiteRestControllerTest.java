@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.service.IUniversiteService;
+import tn.esprit.tpfoyer.control.UniversiteRestController;
 
 import java.util.Arrays;
 import java.util.List;
