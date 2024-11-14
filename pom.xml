@@ -91,11 +91,7 @@
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
-            <url>http://192.168.33.10:8081/repository/maven-snapshots/</url> <!-- Update with your Nexus IP/URL -->
-            <authentication>
-                <username>admin</username>
-                <password>admin</password>
-            </authentication>
+            <url>http://192.168.33.10:8081/repository/maven-snapshots/</url> <!-- Update with your Nexus IP/URL -->   
         </snapshotRepository>
     </distributionManagement>
 
