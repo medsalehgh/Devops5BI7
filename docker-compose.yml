@@ -17,7 +17,7 @@ services:
     depends_on:
       - mysqldb
     build: .
-    image: salehghattas/devops
+    image: saleh28/devops
     restart: on-failure
     ports:
       - "8089:8089"
