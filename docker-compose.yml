@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+  TpFoyer:
+    container_name: tp-foyer:5.0.0
+    image: mrad221/tp-foyer:5.0.0  # Replace with your actual Docker Hub image name
+    ports:
+      - "8085:8089"  # Host port 8085 mapped to container port 8089
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://dbmysql:3306/db?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root  # Set MySQL root password
+      - SERVER_PORT=8089
+      - SERVER_SERVLET_CONTEXT_PATH=/tpfoyer
+    restart: unless-stopped
+    depends_on:
+      - dbmysql
+
+  dbmysql:
+    image: "mysql:5.6"
+    container_name: dbmysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root  # MySQL root password
+      - MYSQL_DATABASE=db  # Initializes the database
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
