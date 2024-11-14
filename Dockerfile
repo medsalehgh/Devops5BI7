@@ -1,4 +1,7 @@
-FROM openjdk:17-jdk-alpine
+# Use OpenJDK 17 as the base image
+FROM openjdk:17
+# Expose the port that the Spring Boot app will use
 EXPOSE 8089
-ADD target/tp-foyer-5.0.0.jar tpfoyer-5.0.0.jar
-ENTRYPOINT ["java", "-jar", "/tpfoyer-5.0.0.jar"]
+COPY target/tp-foyer-5.0.0.jar tp-foyer-5.0.0.jar
+# Run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "tp-foyer-5.0.0.jar"]
