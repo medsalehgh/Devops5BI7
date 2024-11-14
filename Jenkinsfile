@@ -6,10 +6,7 @@ pipeline {
         SONAR_PROJECT_KEY = 'Devops5BI7'  // SonarQube project key
         SONAR_TOKEN = 'squ_0901cfdbcc1481ffd8927a9c6545107f5b672673'  // SonarQube token
         NEXUS_URL = 'http://192.168.33.10:8081'  // Nexus repository URL
-        NEXUS_CREDENTIALS = 'admin:admin'  // Nexus credentials
         DOCKER_IMAGE_NAME = 'mrad221/tp-foyer:5.0.0'  // Docker image name
-        DOCKER_REGISTRY = 'docker.io'  // Docker Hub registry
-        DOCKER_CREDS = 'docker-hub-credentials'  // Docker Hub credentials ID (to be created in Jenkins)
     }
 
     stages {
@@ -34,7 +31,7 @@ pipeline {
                 script {
                     // Run SonarQube analysis
                     withSonarQubeEnv('Local SonarQube') {
-                        sh 'mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.sources=src'
+                        sh "mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.sources=src -Dsonar.login=${SONAR_TOKEN}"
                     }
                 }
             }
@@ -43,8 +40,10 @@ pipeline {
         stage('Publish Artifact to Nexus') {
             steps {
                 script {
-                    // Deploy the artifact to Nexus
-                    sh 'mvn deploy -DaltDeploymentRepository=nexus::default::http://${NEXUS_URL}/repository/maven-releases/'
+                    // Deploy the artifact to Nexus with credentials
+                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+                        sh "mvn deploy -DaltDeploymentRepository=nexus::default::http://${NEXUS_URL}/repository/maven-releases/ -Dnexus.username=${NEXUS_USER} -Dnexus.password=${NEXUS_PASS}"
+                    }
                 }
             }
         }
@@ -53,7 +52,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker build -t ${DOCKER_IMAGE_NAME} .'
+                    sh "docker build -t ${DOCKER_IMAGE_NAME} ."
                 }
             }
         }
@@ -61,12 +60,12 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    // Login to Docker Hub
+                    // Login and push Docker image to Docker Hub
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}'
+                        sh "docker push ${DOCKER_IMAGE_NAME}"
+                        sh 'docker logout'
                     }
-                    // Push Docker image to Docker Hub
-                    sh 'docker push ${DOCKER_IMAGE_NAME}'
                 }
             }
         }
