@@ -4,7 +4,7 @@ pipeline {
     environment {
         SONARQUBE = 'Local SonarQube'  // Name of your SonarQube server
         SONAR_PROJECT_KEY = 'Devops5BI7'  // SonarQube project key
-        SONAR_TOKEN = 'squ_0901cfdbcc1481ffd8927a9c6545107f5b672673'  // SonarQube token
+        SONAR_TOKEN = 'sqa_17dec761300cb4b34dab344d98c77f61f22f14e7'  // SonarQube token
         NEXUS_URL = 'http://192.168.33.10:8081'  // Nexus repository URL
         DOCKER_IMAGE_NAME = 'mrad221/tp-foyer:5.0.0'  // Docker image name
     }
