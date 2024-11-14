@@ -88,10 +88,6 @@
         <repository>
             <id>nexus-releases</id>
             <url>http://192.168.33.10:8081/repository/maven-releases/</url> <!-- Update with your Nexus IP/URL -->
-            <authentication>
-                <username>admin</username>
-                <password>admin</password>
-            </authentication>
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
